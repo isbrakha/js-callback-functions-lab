@@ -37,7 +37,9 @@ function writeDing() {
   // named longWords that includes only the words with 7 or more
   // characters
   
-  const longWords = words.filter(/* write an anonymous inline function here */);
+  const longWords = words.filter(function (word){
+    return word.length > 6
+  });
   
   // Check that logging longWords outputs
   // ["lengthy", "delicious"]
@@ -56,6 +58,12 @@ function writeDing() {
     console.log(`Index: ${idx} / Element Value: ${elem}`);
   }
   
+
+  function forEach (cb, arr) {
+    for (let i = 0; i < arr.length; i++) {
+        cb(arr[i], i)
+    }
+  }
   // calling forEach(colors, log) should resulting in this output:
   // Index: 0 / Element Value: red
   // Index: 1 / Element Value: green
@@ -103,3 +111,13 @@ function writeDing() {
   - You cannot call `step2` until after `step1` has "finished", similarly, you cannot call `step3` until `step2` has "finished".
   - You must console.log the last line of the output, `FINISHED`, after `step3` has "finished".
   */
+
+  function steps (cb, step1, step2, step3) {
+    cb(step1, 250)
+    cb(step2, 1000)
+    cb(step3, 2000)
+    cb(function(){console.log('FINISHED')}, 3000)
+  }
+  
+  steps(setTimeout,step1,step2,step3)
+
